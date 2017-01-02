@@ -1,0 +1,4 @@
+* Create VPC peering
+* Enable route table
+* Enable security group
+
