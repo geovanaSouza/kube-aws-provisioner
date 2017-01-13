@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#k8s
+export KUBE_AWS_VERSION="v0.8.3"
+export CLUSTER_NAME=<insert_cluster_name>
+export EXTERNAL_DNS=<insert_dns_cluster_external>
+#aws
+export AWS_ACCESS_KEY="<insert_your_key>"
+export AWS_SECRET_KEY="<insert_your_secret>"
+export AWS_REGION="<insert_aws_region>"
+export AWS_ZONE=<insert-aws_zone>
+export AWS_PROFILE="<insert_aws_profile>"
+export AWS_KEY=<insert_aws_key_name>
+export AWS_ARN="<insert_arn>"  
+#PersistenceVolumns (in Gb)
+PV=[{"name": "MQ_CAPACITY","capacity": "1" }]

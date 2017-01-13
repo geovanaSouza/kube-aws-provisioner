@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export AWS_PROFILE=<insert_aws_profile>
-CLUSTER_NAME=<insert_cluster_name>
+source scripts/.set-env.sh
 
 cd ${CLUSTER_NAME}
 kube-aws up

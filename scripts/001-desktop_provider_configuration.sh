@@ -1,11 +1,6 @@
 #!/bin/bash
 
-KUBE_AWS_VERSION="v0.8.3"
-AWS_ACCESS_KEY="<insert_your_key>"
-AWS_SECRET_KEY="<insert_your_secret>"
-AWS_REGION="<insert_aws_region>"
-AWS_PROFILE="<insert_aws_profile>"
-
+source scripts/.set-env.sh
 
 check_plataform(){
   if [ "$(uname)" == "Darwin" ]; then
