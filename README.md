@@ -2,7 +2,9 @@
 
 ## Setup Aws
 
-- Installing clients needed in local dektop
+- Rename scripts/.set-env.sh.template to scripts/.set-env.sh replacing the environment variables 
+
+- Execute first script to instal clients needed in local dektop
 ```
 ./scripts/001-desktop_provider_configuration.sh
 ```

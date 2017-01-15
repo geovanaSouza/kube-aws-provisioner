@@ -2,6 +2,8 @@
 
 source scripts/.set-env.sh
 
+aws kms --region=${AWS_REGION} --profile ${AWS_PROFILE} create-key --description="kube-aws assets"
+
 kube-aws init \
 --cluster-name=${CLUSTER_NAME} \
 --external-dns-name=${EXTERNAL_DNS} \
