@@ -14,22 +14,13 @@ check_plataform(){
 }
 
 install_kube-aws(){
-  echo "###Importing CoreOs gpg key"
-  echo
-  gpg2 --keyserver pgp.mit.edu --recv-key FC8A365E
-  
-  FINGERPRINT=$(gpg2 --fingerprint FC8A365E | grep 'Key fingerprint' | awk -F '=' '{print $2}' | tr -d ' ')
-  
-  if [[ "$FINGERPRINT" != '18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E' ]]; then
-    echo Fingerprint invalid. Verify key integrity
-  fi
-  echo "####################"
-  
   check_plataform
-  if [ ! -f "/usr/local/bin/kube-aws"  ];then
+  kube_aws_local=$(/usr/local/bin/kube-aws version)
+  echo $kube_aws_local
+  if [[ ${kube_aws_local} != "kube-aws version ${KUBE_AWS_VERSION}" ]];then
     rm -rf /tmp/kube-aws
     mkdir -p /tmp/kube-aws
-    wget -O /tmp/kube-aws/kube-aws-${PLATAFORM}-amd64.tar.gz https://github.com/coreos/coreos-kubernetes/releases/download/${KUBE_AWS_VERSION}/kube-aws-${PLATAFORM}-amd64.tar.gz
+    wget -O /tmp/kube-aws/kube-aws-${PLATAFORM}-amd64.tar.gz https://github.com/coreos/kube-aws/releases/download/${KUBE_AWS_VERSION}/kube-aws-${PLATAFORM}-amd64.tar.gz
     tar vxzfp /tmp/kube-aws/kube-aws-${PLATAFORM}-amd64.tar.gz -C /tmp/kube-aws
     chmod +x /tmp/kube-aws/${PLATAFORM}-amd64/kube-aws
     sudo mv /tmp/kube-aws/${PLATAFORM}-amd64/kube-aws /usr/local/bin/kube-aws
@@ -37,8 +28,15 @@ install_kube-aws(){
   fi
 }
 
+install_aws(){
+  env -u AWS_PROFILE aws --version
+  if [ $? -ne 0 ];then
+    sudo pip install awscli
+  fi
+}
+
 configure_aws_profile(){
-  aws configure list --profile ${AWS_PROFILE}
+  aws configure list --profile ${AWS_PROFILE} 2> /dev/null
   if [ $? != 0 ]; then
     echo "[${AWS_PROFILE}]" >> ~/.aws/credentials
     echo "aws_access_key_id = ${AWS_ACCESS_KEY}" >> ~/.aws/credentials
@@ -50,4 +48,5 @@ configure_aws_profile(){
 }
 
 install_kube-aws
+install_aws
 configure_aws_profile
