@@ -15,7 +15,6 @@ check_plataform(){
 
 install_kube-aws(){
   kube_aws_local=$(/usr/local/bin/kube-aws version)
-  echo $kube_aws_local
   if [[ ${kube_aws_local} != "kube-aws version ${KUBE_AWS_VERSION}" ]];then
     rm -rf /tmp/kube-aws
     mkdir -p /tmp/kube-aws

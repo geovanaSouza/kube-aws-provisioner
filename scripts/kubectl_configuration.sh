@@ -1,7 +1,9 @@
 #!/bin/bash
 
-kubectl_version=v1.4.5
-MASTER_HOST=<insert_your_external_dns_cluster>
+source scripts/.set-env.sh
+
+kubectl_version=v1.4.6
+MASTER_HOST=${EXTERNAL_DNS}
 CERTS_PATH=<insert_your_certs_path>
 CA_CERT=${CERTS_PATH}/ca.pem
 ADMIN_KEY=${CERTS_PATH}/admin-key.pem
@@ -21,9 +23,9 @@ check_plataform(){
 
 copy_key(){
   mkdir -p ${CERTS_PATH}
-  cp k8s-glasshouse-prd/credentials/ca.pem ${CERTS_PATH}/
-  cp k8s-glasshouse-prd/credentials/admin-key.pem ${CERTS_PATH}/
-  cp k8s-glasshouse-prd/credentials/admin.pem ${CERTS_PATH}/
+  cp k8s_${CLUSTER_NAME}/credentials/ca.pem ${CERTS_PATH}/
+  cp k8s_${CLUSTER_NAME}/credentials/admin-key.pem ${CERTS_PATH}/
+  cp k8s_${CLUSTER_NAME}/credentials/admin.pem ${CERTS_PATH}/
 }
 
 install_kubectl(){

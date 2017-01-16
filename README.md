@@ -6,19 +6,16 @@
 
 - Execute first script to instal clients needed in local dektop
 ```
-./scripts/001-desktop_provider_configuration.sh
+./scripts/001-desktop_local_configuration.sh
 ```
-- Creating certificates in ARN
-```
-./scripts/002-create_kms.sh
 ```
 - Creating initial files to cluster
 ```
-./scripts/003-cluster-init.sh
+./scripts/002-cluster-init.sh
 ```
 - Start up k8s cluster
 ```
-./scripts/004-cluster-start.sh
+./scripts/003-cluster-provisioner.sh
 ```
 
 ## Update app
