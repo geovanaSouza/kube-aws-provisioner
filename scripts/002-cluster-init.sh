@@ -9,7 +9,7 @@ create_kms(){
   status_key=$(aws kms --region=${AWS_REGION} --profile=${AWS_PROFILE} describe-key --key-id ${KUBE_KMS} | jq .KeyMetadata.KeyState | tr -d '"' 2> /dev/null)
   if [[ ${status_key} != 'Enabled' ]];then
     export KUBE_KMS=$(aws kms --region=${AWS_REGION} --profile ${AWS_PROFILE} create-key --description="${CLUSTER_NAME} kube-aws key" --output json --query 'KeyMetadata.KeyId' | tr -d '"')
-    export KUBE_ARN=$(aws kms --region=${AWS_REGION} --profile=${AWS_PROFILE} describe-key --key-id ${KUBE_KMS} | jq .KeyMetadata.Arn)
+    export KUBE_ARN=$(aws kms --region=${AWS_REGION} --profile=${AWS_PROFILE} describe-key --key-id ${KUBE_KMS} | jq .KeyMetadata.Arn | tr -d '"')
     echo "export KUBE_KMS=${KUBE_KMS}" > info/.kms_key
     echo "export KUBE_ARN=${KUBE_ARN}" >> info/.kms_key
     echo KMS Key created: ${KUBE_KMS}
