@@ -11,5 +11,6 @@ export AWS_REGION="<insert_aws_region>"
 export AWS_ZONE=<insert-aws_zone>
 export AWS_PROFILE="<insert_aws_profile>"
 export AWS_KEY=<insert_aws_key_name>
+export AWS_BUCKET=k8s-aws-provisioner-${CLUSTER_NAME}
 #PersistenceVolumns (in Gb)
 #export PV="[{\"name\": \"MQ_CAPACITY\",\"capacity\": \"1\" }]"
