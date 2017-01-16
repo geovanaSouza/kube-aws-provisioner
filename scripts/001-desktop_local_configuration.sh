@@ -14,7 +14,6 @@ check_plataform(){
 }
 
 install_kube-aws(){
-  check_plataform
   kube_aws_local=$(/usr/local/bin/kube-aws version)
   echo $kube_aws_local
   if [[ ${kube_aws_local} != "kube-aws version ${KUBE_AWS_VERSION}" ]];then
@@ -25,6 +24,14 @@ install_kube-aws(){
     chmod +x /tmp/kube-aws/${PLATAFORM}-amd64/kube-aws
     sudo mv /tmp/kube-aws/${PLATAFORM}-amd64/kube-aws /usr/local/bin/kube-aws
     rm -rf /tmp/kube-aws
+  fi
+}
+
+install_jq(){
+  if [[ ${PLATAFORM} == 'linux' ]];then
+    sudo apt-get install jq
+  elif [[ ${PLATAFORM} == 'darwin' ]];then
+    sudo brew install jq
   fi
 }
 
@@ -47,6 +54,8 @@ configure_aws_profile(){
   fi
 }
 
+check_plataform
 install_kube-aws
+install_jq
 install_aws
 configure_aws_profile
