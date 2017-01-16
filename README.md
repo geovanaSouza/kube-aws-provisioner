@@ -8,7 +8,6 @@
 ```
 ./scripts/001-desktop_local_configuration.sh
 ```
-```
 - Creating initial files to cluster
 ```
 ./scripts/002-cluster-init.sh
